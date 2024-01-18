@@ -164,13 +164,18 @@ def test_run(project_root, request) -> str:
     return test_results_dir
 
 
-@pytest.fixture(scope="session")
+class RPLogger:
+    pass
+
+
+@pytest.fixture(scope="session") # review
 def rp_logger(request):
     """ Report Portal Logger """
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.DEBUG)
     # Create handler for Report Portal if the service has been
     # configured and started.
+    """
     if hasattr(request.node.config, 'py_test_service'):
         # Import Report Portal logger and handler to the test module.
         logging.setLoggerClass(RPLogger)
@@ -183,6 +188,7 @@ def rp_logger(request):
         rp_handler = logging.StreamHandler(sys.stdout)
     # Set INFO level for Report Portal handler.
     rp_handler.setLevel(logging.INFO)
+     """
     return logger
 
 
@@ -339,14 +345,12 @@ def pytest_runtest_makereport(item, call):
 
 
 def version_urls():
-    environments = {"dev": "https://benefits.plansourcedev.com/ver.txt",
-                    "uat": "https://benefits.plansourcetest.com/ver.txt",
-                    "partner_dev": "https://partner-dev-benefits.plansource.com/ver.txt",
-                    "prod": "https://benefits.plansource.com/ver.txt"}
+    environments = {"uat": "https://www.booking.com/ver.txt",
+                    "prod": "https://www.booking.com/ver.txt"}
     return environments
 
 
-def webhook_urls():
+def webhook_urls(): # review
     url_hash = {"cicd": "https://hooks.ringcentral.com/webhook/v2/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvdCI6ImMiLCJvaSI6IjE0MzM1NzA1MDg5IiwiaWQiOiIyMjE4Nzc4NjUxIn0.sq06fgKHxn7XxaZDaJ3H-GjeIY5NmzPDAnWup3F8pQU",
                 "qa_patch": "https://hooks.ringcentral.com/webhook/v2/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvdCI6InUiLCJvaSI6IjEzOTEzNjg4MzkxNzEiLCJpZCI6IjE0ODc1NjA3MzEifQ.I91Dhz7_GqFnDsi0cNtiWbLwOAOswDISy7l-RtP-xuU",
                 "carrier": "https://hooks.ringcentral.com/webhook/v2/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvdCI6ImMiLCJvaSI6IjE0MzM1NzA1MDg5IiwiaWQiOiIyMjE4Nzk1MDM1In0.UW6RtUf3GUSIFhcnbVCKZqtlWyyED_lYFQK_zMuxnyo"}

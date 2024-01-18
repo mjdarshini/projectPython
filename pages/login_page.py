@@ -82,9 +82,9 @@ class LoginPage(BasePage):
 
     def __init__(self, driver, title="Product Login"):
         super().__init__(driver)
-        self.url = self.config['base_urls']['benefits']
-        self.emp_credentials_recover_page_url = f"{self.config['base_urls']['benefits']}/logon_assist/user_details"
-        self.admin_credentials_recover_page_url = f"{self.config['base_urls']['benefits']}/logon_assist/assist_type"
+        self.url = self.config['base_urls']['base']
+        self.emp_credentials_recover_page_url = f"{self.config['base_urls']['base']}/logon_assist/user_details"
+        self.admin_credentials_recover_page_url = f"{self.config['base_urls']['base']}/logon_assist/assist_type"
         self.title = title
 
     # region General Page Actions
@@ -143,14 +143,6 @@ class LoginPage(BasePage):
     def save(self):
         self.click_element(self.SAVE_BUTTON)
 
-    def username_hcm_dashboard(self, value):
-        self.fill_out_text_field(self.HCM_DASHBOARD_USERNAME, value)
-
-    def password_hcm_dashboard(self, value):
-        self.fill_out_text_field(self.HCM_DASHBOARD_PASSWORD, value)
-
-    def submit_hcm_dashboard(self):
-        self.click_element(self.HCM_DASHBOARD_SUBMIT, ajax=False)
 
     # todo add alert check to the click element function
     def update_contact_info_save(self):
@@ -179,9 +171,6 @@ class LoginPage(BasePage):
     def fill_mfa_message_text_field(self, value):
         self.fill_out_text_field(self.MFA_MESSAGE_FIELD, value)
 
-    def click_mfa_login_button(self):
-        self.click_element(self.MFA_LOGIN_BUTTON)
-
     # endregion General Page Actions
 
     global login_org_name
@@ -199,14 +188,6 @@ class LoginPage(BasePage):
             login_org_name = None
         return timing
 
-    def goto_analytics(self):
-        self.goto_page(self.config['base_urls']['analytics'])
-
-    def analytics_login(self, username, password, ajax = False):
-        self.goto_analytics()
-        self.username(username)
-        self.password(password)
-        self.login_button(ajax=False)
 
     def goto_emp_credentials_recover_page(self):
         self.goto_page(self.emp_credentials_recover_page_url)
@@ -216,11 +197,6 @@ class LoginPage(BasePage):
 
 
     # region Specific Login Methods #
-    def login_as_organization(self):
-        username = self.config['organizations']['create_new_employee']['username']
-        password = self.config['organizations']['create_new_employee']['password']
-
-        return self.login(username, password)
 
     def login_as_root(self):
         self.safe_login(self.config['login']['root_username'], self.config['login']['root_password'])
@@ -409,7 +385,7 @@ class LoginPage(BasePage):
     # region Need Help
 
     def emp_credentials_recover_page_url(self):
-        return f"{self.config['base_urls']['benefits']}/logon_assist/assist_type"
+        return f"{self.config['base_urls']['base']}/logon_assist/assist_type"
 
     def click_forgot_username_radio_button(self):
         self.click_element(self.FORGOT_UN_RADIO_BUTTON)

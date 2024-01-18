@@ -1,0 +1,7 @@
+#QA Automation-Partner Marketplace add benefithub_url = "http://10.140.0.175:4444/wd/hub"
+downloads_directory = "test_data/downloads"
+server_count = "4"
+
+
+[base_urls]
+base = "https://www.booking.com/"
