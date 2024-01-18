@@ -25,7 +25,7 @@ subscriber_password_ui2 = "subs12345"
 admin_workflow_base = "QA Automation - admin workflow base"
 
 [base_urls]
-benefits = "https://turvo.com/"
+benefits = "https://www.booking.com/"
 broker = "https://benefits.plansourcetest.com/broker"
 admin = "https://benefits.plansourcetest.com/ops-admin"
 ulti_pro_login = "https://plansweb.ultiproservices.com/"
