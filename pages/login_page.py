@@ -76,6 +76,12 @@ class LoginPage(BasePage):
     HCM_DASHBOARD_PASSWORD = By.ID, "txtUserPassword"
     HCM_DASHBOARD_SUBMIT = By.XPATH, "//button[@type='submit']"
     CHATBOT_ICON = By.XPATH, "//*[local-name()='svg']"
+
+    # Sign in
+    SIGN_IN_BUTTON = By.XPATH, "//a[contains(@aria-label,'Create')]"
+
+
+
     # endregion Locators
 
     # page class constructor
@@ -475,3 +481,6 @@ class LoginPage(BasePage):
 
     def click_new_password_eye_icon(self):
         self.click_element(self.NEW_CHANGED_PASSWORD_EYE_ICON)
+
+    def create_account(self):
+        self.click_element(self.SIGN_IN_BUTTON)
